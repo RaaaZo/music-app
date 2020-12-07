@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
+// Import Styles
+import './styles/app.scss'
+
+// Import components
+import Player from './components/Player'
+import Song from './components/Song'
+
+// Import data
+import chillHop from './data/data'
+import Library from './components/Library'
+
+const App: React.FC<{}> = () => {
+  const [songs, setSongs] = useState(chillHop)
+  const [currentSong, setCurrentSong] = useState(songs[0])
+  const [isPlaying, setIsPlaying] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Song currentSong={currentSong} />
+      <Player currentSong={currentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+      <Library songs={songs} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
